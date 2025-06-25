@@ -122,11 +122,33 @@ def to_excel_bytes(df_to_export):
         df_to_export.to_excel(writer, index=False)
     return output.getvalue()
 
-# --- ปุ่มดาวน์โหลด Excel ---
-if not filtered_df.empty:
-    st.download_button(
-        label="📥 ดาวน์โหลดข้อมูลที่กรองเป็น Excel",
-        data=to_excel_bytes(filtered_df),
-        file_name="filtered_data.xlsx",
-        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    )
+# --- แสดงปุ่มดาวน์โหลดและอัปโหลด Excel --- #
+col_dl, col_up = st.columns(2)
+
+with col_dl:
+    if not filtered_df.empty:
+        st.download_button(
+            label="📥 ดาวน์โหลดข้อมูลที่กรองเป็น Excel",
+            data=to_excel_bytes(filtered_df),
+            file_name="filtered_data.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+
+with col_up:
+    st.markdown("#### 📤 อัปโหลด Excel เพื่อเพิ่มข้อมูลเข้า Google Sheets")
+    uploaded_file = st.file_uploader("เลือกไฟล์ Excel", type=["xlsx"])
+    if uploaded_file:
+        try:
+            uploaded_df = pd.read_excel(uploaded_file)
+
+            # ตรวจสอบคอลัมน์
+            missing_cols = [col for col in required_columns if col not in uploaded_df.columns]
+            if missing_cols:
+                st.error(f"❌ คอลัมน์เหล่านี้หายไปจากไฟล์ที่อัปโหลด: {', '.join(missing_cols)}")
+            else:
+                # เพิ่มข้อมูลลง Google Sheets
+                sheet.append_rows(uploaded_df.values.tolist(), value_input_option="USER_ENTERED")
+                st.success(f"✅ เพิ่มข้อมูล {len(uploaded_df)} แถวลงใน Google Sheets เรียบร้อยแล้ว")
+        except Exception as e:
+            st.error(f"เกิดข้อผิดพลาดขณะอ่านไฟล์: {e}")
+
