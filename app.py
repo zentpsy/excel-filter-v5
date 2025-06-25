@@ -95,7 +95,7 @@ if "ทั้งหมด" not in selected_departments:
 if not filtered_df.empty:
     st.markdown(
         f"<div style='font-size:24px; color:#3178c6; background-color:#d0e7ff; padding:10px; border-radius:6px;'>"
-        f"📈 พบข้อมูลทั้งหมด {len(filtered_df)} รายการ</div>",
+        f"📈 พบข้อมูลทั้งหมด {len(filtered_df)} แห่ง</div>",
         unsafe_allow_html=True
     )
 else:
@@ -110,7 +110,7 @@ def to_excel_bytes(df_to_export):
         df_to_export.to_excel(writer, index=False)
     return output.getvalue()
 
-col_up, spacer, col_dl = st.columns([2,1,1])
+col_up, spacer, col_dl = st.columns([1,2,1])
 
 with col_dl:
     if not filtered_df.empty:
