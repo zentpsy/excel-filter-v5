@@ -22,7 +22,12 @@ WORKSHEET_NAME = "Sheet1"  # ชื่อชีตที่ต้องการ
 sheet = gc.open_by_key(SPREADSHEET_ID).worksheet(WORKSHEET_NAME)
 
 # ดึงข้อมูลมาเป็น dict แล้วแปลงเป็น DataFrame
-data = sheet.get_all_records()
+@st.cache_data(ttl=0, show_spinner="📡 กำลังโหลดข้อมูลจาก Google Sheets...")
+def load_data():
+    return sheet.get_all_records()
+
+data = load_data()
+
 df = pd.DataFrame(data)
 
 # ตรวจสอบคอลัมน์
