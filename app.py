@@ -16,7 +16,7 @@ credentials = Credentials.from_service_account_info(creds_info, scopes=["https:/
 gc = gspread.authorize(credentials)
 
 # --- เปิด Google Sheet และ Worksheet ---
-SPREADSHEET_ID = "ใส่ Spreadsheet ID ตรงนี้"  # เช่น https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit...
+SPREADSHEET_ID = "1Pjf0A4-M9NTxkK8Cj0AMCMiLmazfQNqq7zRb3Lnw2G8"  # เช่น https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit...
 WORKSHEET_NAME = "Sheet1"  # ชื่อชีตที่ต้องการดึงข้อมูล
 
 sheet = gc.open_by_key(SPREADSHEET_ID).worksheet(WORKSHEET_NAME)
