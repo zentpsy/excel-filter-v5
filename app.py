@@ -110,7 +110,7 @@ def to_excel_bytes(df_to_export):
         df_to_export.to_excel(writer, index=False)
     return output.getvalue()
 
-col_dl, col_up = st.columns(2)
+col_up, col_dl = st.columns(2)
 
 with col_dl:
     if not filtered_df.empty:
