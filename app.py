@@ -18,11 +18,6 @@ WORKSHEET_NAME = "Sheet1"
 
 sheet = gc.open_by_key(SPREADSHEET_ID).worksheet(WORKSHEET_NAME)
 
-# ปุ่มรีเฟรชข้อมูล
-if st.button("🔄 โหลดข้อมูลล่าสุดจาก Google Sheets"):
-    st.cache_data.clear()
-    st.experimental_rerun()
-
 @st.cache_data(ttl=0, show_spinner="📡 กำลังโหลดข้อมูลจาก Google Sheets...")
 def load_data():
     return sheet.get_all_records()
