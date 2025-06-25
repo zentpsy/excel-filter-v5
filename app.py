@@ -110,7 +110,7 @@ def to_excel_bytes(df_to_export):
         df_to_export.to_excel(writer, index=False)
     return output.getvalue()
 
-col_up, spacer, col_dl = st.columns([3,1,1])
+col_up, spacer, col_dl = st.columns([2,1,1])
 
 with col_dl:
     if not filtered_df.empty:
@@ -123,7 +123,7 @@ with col_dl:
 with spacer:
     st.write("")
 with col_up:
-    st.markdown("#### 📤 อัปโหลด Excel เพื่อเพิ่มข้อมูลเข้า Google Sheets")
+    st.markdown("## 📤 อัปโหลด Excel เพื่อเพิ่มข้อมูล")
     uploaded_file = st.file_uploader("เลือกไฟล์ Excel", type=["xlsx"])
     if uploaded_file:
         try:
