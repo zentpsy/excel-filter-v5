@@ -123,7 +123,8 @@ with col_dl:
 with spacer:
     st.write("")
 with col_up:
-    st.markrigth("📤 อัปโหลด Excel เพื่อเพิ่มข้อมูล")
+    st.markdown
+    ("📤 อัปโหลด Excel เพื่อเพิ่มข้อมูล")
     uploaded_file = st.file_uploader("เลือกไฟล์ Excel", type=["xlsx"])
     if uploaded_file:
         try:
